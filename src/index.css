@@ -1,1 +1,93 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ═══════════════════════════════════════════════════════════
+   Design Tokens — raw CSS vars, change based on .dark on <html>
+   ═══════════════════════════════════════════════════════════ */
+
+@layer base {
+  /* Apply Manrope globally */
+  html {
+    font-family: 'Manrope', sans-serif;
+  }
+
+  /* Light mode (default) */
+  :root {
+    /* Backgrounds */
+    --c-surface:     #fafafa;
+    --c-nav:         #fafafa;
+    --c-card:        #ffffff;
+    --c-card-post:   #ffffff;
+    --c-input:       #ffffff;
+    --c-divider:     #e2e8f0;
+
+    /* Borders */
+    --c-edge:        #e2e8f0;
+
+    /* Text */
+    --c-heading:     #314158;
+    --c-body:        #314158;
+    --c-muted:       #62748e;
+    --c-placeholder: #62748e;
+
+    /* Logo & footer accent (blue in light, white in dark) */
+    --c-logo:        #0d93f2;
+  }
+
+  /* Dark mode — active when <html class="dark"> */
+  .dark {
+    /* Backgrounds */
+    --c-surface:     #0f172b;
+    --c-nav:         #0f172b;
+    --c-card:        #1d293d;
+    --c-card-post:   #1a2235;
+    --c-input:       #1d293d;
+    --c-divider:     #2a3a50;
+
+    /* Borders */
+    --c-edge:        #62748e;
+
+    /* Text */
+    --c-heading:     #ffffff;
+    --c-body:        #cbd5e1;
+    --c-muted:       #6e767d;
+    --c-placeholder: #62748e;
+
+    /* Logo & footer accent */
+    --c-logo:        #ffffff;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Tailwind Theme — maps CSS vars → Tailwind utility classes
+   e.g. bg-nav, text-heading, border-edge, bg-brand …
+   ═══════════════════════════════════════════════════════════ */
+
+@theme {
+  /* Font */
+  --font-sans: 'Manrope', sans-serif;
+
+  /* Backgrounds */
+  --color-surface:   var(--c-surface);
+  --color-nav:       var(--c-nav);
+  --color-card:      var(--c-card);
+  --color-card-post: var(--c-card-post);
+  --color-input:     var(--c-input);
+  --color-divider:   var(--c-divider);
+
+  /* Borders */
+  --color-edge:      var(--c-edge);
+
+  /* Text */
+  --color-heading:     var(--c-heading);
+  --color-body:        var(--c-body);
+  --color-muted:       var(--c-muted);
+  --color-placeholder: var(--c-placeholder);
+  --color-logo:        var(--c-logo);
+
+  /* Brand — fixed in both themes */
+  --color-brand: #0d93f2;
+  --color-heart: #eb5757;
+}

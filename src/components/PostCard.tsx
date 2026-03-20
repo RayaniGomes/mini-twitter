@@ -18,16 +18,16 @@ interface PostCardProps {
 
 export function PostCard({ name, handle, date, title, content, image, liked }: PostCardProps) {
   return (
-    <article className="w-full bg-[#1A2235] rounded-[12px] border border-[#62748E] p-4 flex flex-col gap-[8px]">
+    <article className="w-full bg-card-post rounded-[12px] border border-edge p-4 flex flex-col gap-[8px] transition-colors duration-300">
       <div className="flex items-center gap-[6px]">
-        <span className="font-bold text-[16px] text-[#FFFFFF]">{name}</span>
-        <span className="font-regular text-[14px] text-[#6E767D]">{handle}</span>
-        <span className="font-regular text-[14px] text-[#6E767D]">&middot; {date}</span>
+        <span className="font-bold text-[16px] text-heading">{name}</span>
+        <span className="font-regular text-[14px] text-muted">{handle}</span>
+        <span className="font-regular text-[14px] text-muted">&middot; {date}</span>
       </div>
       
-      <h2 className="font-bold text-[18px] text-[#FFFFFF]">{title}</h2>
+      <h2 className="font-bold text-[18px] text-heading">{title}</h2>
       
-      <p className="font-regular text-[16px] text-[#CBD5E1] leading-relaxed">
+      <p className="font-regular text-[16px] text-body leading-relaxed">
         {content}
       </p>
       
@@ -40,7 +40,7 @@ export function PostCard({ name, handle, date, title, content, image, liked }: P
       )}
       
       <div className="mt-2 flex items-center gap-2">
-        <button className="hover:bg-[#EB5757]/10 p-2 rounded-full transition-colors -ml-2 flex items-center justify-center group cursor-pointer">
+        <button className="hover:bg-heart/10 p-2 rounded-full transition-colors -ml-2 flex items-center justify-center group cursor-pointer">
           <HeartIcon filled={liked} />
         </button>
       </div>
