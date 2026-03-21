@@ -1,5 +1,5 @@
 // src/components/CreatePost.tsx
-import { ImageIcon } from './Icons';
+import { Gallery } from 'iconsax-react';
 
 export function CreatePost() {
   return (
@@ -13,7 +13,7 @@ export function CreatePost() {
       
       <div className="flex items-center justify-between">
         <button className="p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-full transition-colors flex items-center justify-center cursor-pointer">
-          <ImageIcon />
+          <Gallery size={32} color="#1D9BF0" />
         </button>
         <button className="bg-brand text-white font-bold px-6 py-2 rounded-[8px] hover:bg-brand/90 transition-colors shadow-[0px_4px_6px_-4px_rgba(13,147,242,0.2),0px_10px_15px_-3px_rgba(13,147,242,0.2)] cursor-pointer">
           Postar

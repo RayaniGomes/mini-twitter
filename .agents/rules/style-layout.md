@@ -2,155 +2,272 @@
 trigger: always_on
 ---
 
-1. ESTRUTURA GERAL
-  - Tipo de interface: Web app — feed de rede social estilo Twitter/X
-  - Orientação: Retrato (desktop, layout vertical centralizado)
-  - Divisão de seções da pagina home:
-    - Header (Navbar): Barra superior fixa com logo, campo de busca centralizado e botões de ação à direita
-    - Body (Feed): Coluna central com largura máxima ~500px, centralizada horizontalmente, contendo:
-      - Card de composição de post (Create Post)
-      - Cards de posts individuais
-      - Scroll infinito: Lista os posts do feed sem necessidade de botões de paginação, basta chegar ao final da lista que a próxima página é buscada
-    - Footer: Barra inferior escura com texto "Mini Twitter"
-    - Grid/Colunas: Layout de coluna única centralizada. Sem sidebar. O conteúdo principal fica em uma única coluna com max-width estimada em ~500px, com margens automáticas laterais.
-    - Hierarquia visual: Navbar → Card de Criação → Cards de Posts → Paginação → Footer
-  - Divisão de sessão da pagian de login/registro:
-    - Container central único com largura máxima estimada em ~450px
-    - Sem header ou footer estrutural — tudo dentro do card/área central
-    - Hierarquia visual:
-      - Título "Mini Twitter" (topo, destaque máximo);
-      - Tabs de navegação (Login / Cadastrar);
-      - Heading do formulário (login: "Olá, de novo!", cadastro: "Olá, vamos começar!");
-      - Campos de input;
-      - Botão CTA (Continuar);
-      - Texto legal (menor importância);
+## 1. ESTRUTURA GERAL
 
+### Fonte Global
 
-2. TIPOGRAFIA
-  - Logo (navbar): ~18px, Bold, dark: #FFFFFF, light: #0D93F2;
-  - Botão primario: ~16px, Bold, #FFFFFF;
-  - Botão secundario: ~16px, Bold, #FFFFFF;
-  - Bordar: dark: 1px solid #62748E, light: 1px solid #E2E8F0;
-  - Placeholder input busca: ~14px, Medium, #62748E;
-  - Placeholder textarea: ~18px, Medium, #62748E;
-  - Nome do autor: ~16px, Bold, dark: #FFFFFF, light: #314158;
-  - Handle do autor: ~14px, Regular, dark: #6E767D, light: #62748E;
-  - Data: ~14px, Regular, dark: #6E767D, light: #62748E;
-  - Título do post: ~18px, Bold, dark: #FFFFFF, light: #314158;
-  - Corpo do post: ~16px, Regular, dark: #CBD5E1, light: #314158;
-  - Footer: ~18px, Bold, dark: #FFFFFF, light: #0D93F2;
-  - Fonte usada: Manrope.
+- **Família:** Manrope (Google Fonts)
+- **Import:** `https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap`
+- **Pesos utilizados:** 400 (Regular), 500 (Medium), 700 (Bold)
+- Aplicar `font-family: 'Manrope', sans-serif` no elemento raiz (`body` ou `:root`).
 
-3. CORES E PALETA
-  - Paleta identificada:
-  - Fundo global (body): dark: linear-gradient(116.82deg, #0F172B 0%, #070B14 100%), light: #FAFAFA;
-  - Fundo navbar: dark: #0F172B, light: #FAFAFA;
-  - Fundo footer: dark: #0F172B, light: #FAFAFA;
-  - Fundo dos cards:  dark: #1D293D, light: #FFFFFF;
-  - Borda dos cards: dark: 1px solid #62748E, light: 1px solid #E2E8F0;
-  - Fundo input: dark: #1D293D, light: #FFFFFF;
-  - Borda input: dark: 1px solid #62748E, light: 1px solid #E2E8F0;
-  - Texto primário: dark: #FFFFFF, light: #314158;
-  - Texto secundário: dark: #6E767D, light: #62748E;
-  - Texto corpo post: dark: #CBD5E1, light: #314158;
-  - Botão primário: background: #0D93F2; box-shadow: 0px 4px 6px -4px #0D93F233, box-shadow: 0px 10px 15px -3px #0D93F233, border-radius: full;
-  - Botão "Registrar-se" (secundário): border: 1px solid #62748E;
-  - Ícone curtir (ativo): #EB5757;
-  - Ícone curtir (inativo): border: 1.5px solid #EB5757.
+### Tipo de Interface
 
-4. COMPONENTES E ELEMENTOS DE UI
-  - Navbar
-    - Altura estimada: ~65px;
-    - Borda: border-bottom;
-    - Logo: "Mini Twitter" — texto simples, sem ícone;
-    - Search bar: Input centralizado, ~640px de largura, borda arredondada (border-radius: ~8px), fundo levemente mais claro, ícone de lupa à esquerda (cor #1D293D);
-    - Botão "Registrar-se": outline/ghost, border-radius full, padding ~8px 16px;
-    - Botão "Login": filled azul (#0D93F2), border-radius full, padding ~8px 16px.
-    - Botão de logout: icone outline/ghost, border-radius full, padding ~8px 16px, tamanho ~20px.
+Web app — feed de rede social estilo Twitter/X. Orientação retrato, layout vertical centralizado, desktop-first.
 
-  - Tabs de navegação (Login/Cadastro)
-    - Dois itens: "Login" (ativo) e "Cadastrar" (inativo);
-    - Active dos botoes de navegacçao é um underline azul embaixo do item ativo, largura total da tab;
-    - Linha divisória horizontal completa em tom escuro;
-    - Indicador ativo: linha azul #1DA1F2 embaixo do item ativo, largura total da tab;
-    - Sem fundo nas tabs — apenas texto e underline.
+### Modo de Tema
 
-  - Card de Criação de Post
-    - Fundo: #1D293D;
-    - Border-radius: ~12px;
-    - Border: 1px sólida #2A3A50;
-    - Textarea: Fundo transparente, placeholder cinza, sem borda visível interna;
-    - Linha divisória: separador horizontal sutil entre textarea e rodapé do card;
-    - Ícone de imagem: outline, cor azul #1D9BF0, canto inferior esquerdo;
-    - Botão "Postar": filled azul, border-radius ~8px, canto inferior direito.
+- Usar a estratégia `class` do Tailwind CSS: `darkMode: 'class'` no `tailwind.config`.
+- A classe `dark` é aplicada no elemento `<html>`.
+- A preferência do usuário deve ser persistida no `localStorage` com a chave `theme`.
+- Padrão inicial: **dark**.
 
-  - Cards de Post
-    - Fundo: #1A2235;
-    - Border-radius: ~12px;
-    - Border: 1px solid #62748E;
-    - Padding interno: ~16px;
-    - Cabeçalho: Nome (#FFFFFF) + handle (#6E767D) + data (#6E767D), na mesma linha;
-    - Título: Bold, #FFFFFF, ~18px;
-    - Corpo: Regular, #CBD5E1, ^16px;
-    - Imagem (1º post): Retangular, ~606px largura fixa e ~200px altura, border-radius ~8px;
-    - Ícone de curtida: Coração — estado ativo (preenchido vermelho #EB5757) e inativo (outline vermelho #EB5757). - Tamanho ~24px, posicionado abaixo do conteúdo.
+### Página Home — Divisão de Seções
 
-  - Inputs
-    - Estrutura: Label acima + input com ícone à direita;
-    - Border-radius: ~8px;
-    - Altura: ~57px estimada;
-    - Borda: 1px solid;
-    - Fundo: dark: #1D293D, light: #FFFFFF;
-    - Ícones: tamanho ~24px, cor #62748E;
-    - Padding interno: ~16px.
+- **Navbar:** barra superior fixa (`position: sticky; top: 0; z-index: 50`) com logo à esquerda, barra de busca centralizada e botões à direita.
+- **Feed:** coluna única centralizada, `max-width: 640px`, `margin: 0 auto`, `padding-top: 24px`, `padding-bottom: 24px`.
+- **Footer:** barra inferior com texto "Mini Twitter" alinhado à esquerda.
+- **Sem sidebar.** Layout de coluna única.
+- **Hierarquia visual:** Navbar → Card de Criação → Cards de Posts (scroll infinito) → Footer.
 
-  - Botão CTA "Continuar"
-    - Largura: 100% do container;
-    - Altura: ~56px;
-    - Border-radius: full;
-    - Configurações de cor e texto de botão primario.
+### Página Login / Cadastro — Divisão de Seções
 
-  - TOS footer
-    - Texto: "Ao continuar, você concorda com os"
-    - Dois links inline: "Termos de Serviço" e "Política de Privacidade"
-    - Centralizados, quebra de linha entre a frase e os links
-    - Estilo underline nos links
+- Container central flutuante, `max-width: 480px`, sem card com fundo — flutua sobre o fundo global.
+- Sem header ou footer estrutural.
+- **Hierarquia visual:**
+  1. Título "Mini Twitter" (destaque máximo)
+  2. Tabs de navegação (Login / Cadastrar)
+  3. Heading do formulário (`"Olá, de novo!"` no login / `"Olá, vamos começar!"` no cadastro)
+  4. Campos de input
+  5. Botão CTA "Continuar"
+  6. Texto legal TOS (menor importância)
 
-  - Footer
-    - Fundo: #0F172B;
-    - Altura estimada: ~56px;
-    - Apenas o texto "Mini Twitter" alinhado à esquerda.
+## 2. TIPOGRAFIA
 
-5. ESPAÇAMENTO E DIMENSÕES
-  - Home:
-    - Largura máxima do feed: ~640px, centralizado com margin: 0 auto;
-    - Gap entre cards: ~24px;
-    - Padding interno dos cards: ~16px;
-    - Padding top do feed (abaixo da navbar): ~24px;
-    - Padding bottom (antes da paginação): ~24px;
-    - Espaçamento entre nome/handle/data: ~6px horizontal;
-    - Espaçamento entre título e corpo: ~8px;
-    - Espaçamento entre corpo e ícone de curtida: ~8px.
+- **Logo (navbar):** 18px, Bold, dark: #FFFFFF, light: #0D93F2;
+- **Footer:** 18px, Bold, dark: #FFFFFF, light: #0D93F2;
+- **Título do post:** 18px, Bold, dark: #FFFFFF, light: #314158;
+- **Placeholder input:** 14px, Medium, #62748E;
+- **Placeholder textarea:** 18px, Medium, #62748E;
+- **Heading formulário (h1):** 30px, Bold, dark: #FFFFFF, light: #0D93F2
+- **Heading formulário (p):** 16px, Regular, dark: #90A1B9, light: #62748E
+- **Botão primario:** 16px, Bold, #FFFFFF;
+- **Botão secundario:** 16px, Bold, #FFFFFF;
+- **Nome do autor:** 16px, Bold, dark: #FFFFFF, light: #314158;
+- **Corpo do post:** 16px, Regular, dark: #CBD5E1, light: #314158;
+- **Handle do autor:** 14px, Regular, dark: #6E767D, light: #62748E;
+- **Data:** 14px, Regular, dark: #6E767D, light: #62748E;
 
-  - Login/Cadastro:
-    - Container central: largura ~480px, sem card com fundo — flutua sobre o fundo;
-    - Gap entre título e tabs: ~56px
-    - Gap entre tabs e heading: ~24px
-    - Gap entre heading e primeiro input: ~24px
-    - Gap entre campos: ~20px
-    - Gap entre último input e botão: ~24px
-    - Gap entre botão e TOS footer: ~24px
+## 3. CORES E PALETA
 
-6. EFEITOS VISUAIS
-  - Bordas: 1px solid, cor ~#62748E, border-radius ~12px nos cards e full nos inputs/botões arredondados;
-  - Sem glassmorphism ou blur visível;
-  - Hover states: Não visíveis na imagem estática, mas esperados nos botões e ícones;
-  - Transições implícitas: Troca de estado do ícone de curtida (outline → filled) sugere animação de escala ou fade;
+### Tokens de Cor (definir como CSS variables no `:root` e `.dark`)
 
-7. RESPONSIVIDADE
-  - O layout atual é claramente desktop-first:
-  - A coluna central com max-width ~640px ficaria estreita demais em mobile sem ajustes
-  - Em mobile, esperaria-se:
-    - Navbar comprimida (logo some, busca vira ícone)
-    - Cards ocupam 100% da largura da tela (com padding lateral de ~16px)
-    - Botões de registro/login podem migrar para menu hambúrguer
+- `--color-bg-global`: dark: linear-gradient(116.82deg, #0F172B 0%, #070B14 100%), light: #FAFAFA;
+- `--color-bg-navbar`: dark: #0F172B, light: #FAFAFA;
+- `--color-bg-footer`: dark: #0F172B, light: #FAFAFA;
+- `--color-bg-card`: dark: #1D293D, light: #FFFFFF;
+- `--color-border`: dark: 1px solid #62748E, light: 1px solid #E2E8F0;
+- `--color-bg-input`: dark: #1D293D, light: #FFFFFF;
+- `--color-text-primary`: dark: #FFFFFF, light: #314158;
+- `--color-text-secondary`: dark: #6E767D, light: #62748E;
+- `--color-text-body`: dark: #CBD5E1, light: #314158;
+- `--color-like`: #EB5757;
+
+### Cores Fixas (independem do tema)
+
+- **Botão primário (fundo):** `#0D93F2`
+- **Botão primário (sombra):** box-shadow: 0px 4px 6px -4px #0D93F233, box-shadow: 0px 10px 15px -3px #0D93F233, border-radius: full;
+- **Botão primário (hover):** `#0B7DD1` (10% mais escuro)
+- **Botão sefundario (borda)**: #62748E;
+- **Botão secundário (fundo)**: transparente
+- **Ícone curtida ativo:** `fill: #EB5757`
+- **Ícone curtida inativo:** `stroke: #EB5757`, sem preenchimento
+- **Tab ativa (underline):** `#1DA1F2`
+
+## 4. COMPONENTES E ELEMENTOS DE UI
+
+### 4.1 Navbar
+
+- **Altura:** 65px
+- **Posição:** `sticky; top: 0; z-index: 50`
+- **Borda:** border-bottom
+- **Layout:** `flex; align-items: center; justify-content: space-between; padding: 0 24px`
+- **Logo:**
+  - Texto "Mini Twitter", sem ícone
+  - Tipografia: 18px, Bold, cor `--color-brand` no light / `#FFFFFF` no dark
+- **Search bar**
+  - Largura: `max-width: 640px; width: 100%`
+  - `border-radius: 8px`
+  - Ícone de lupa à esquerda, tamanho 20px
+  - Placeholder: "Buscar posts…"
+  - Padding interno: `16px` (espaço para o ícone)
+  - **Botões da Navbar (usuário não autenticado)**
+    - "Registrar-se": ghost/outline, `border: 1px solid --color-border`, `border-radius: full`, `padding: 8px 16px`, 16px Bold
+    - "Login": filled azul `#0D93F2`, `border-radius: full`, `padding: 8px 16px`, 16px Bold, cor texto `#FFFFFF`
+  - **Botão de Logout (usuário autenticado)**
+    - Ícone outline (ex: `LogOut` do Lucide), tamanho 20px
+    - Ghost, `border-radius: full`, `padding: 8px`
+
+### 4.2 Tabs de Navegação (Login / Cadastro)
+
+- Dois itens lado a lado: "Login" e "Cadastrar"
+- Cada tab ocupa 50% da largura do container
+- **Estado ativo:** underline `border-bottom: 2px solid #1DA1F2`, texto `--color-text-primary`
+- **Estado inativo:** sem underline, texto `--color-text-secondary`
+- Sem fundo nas tabs — apenas texto e underline
+- Linha divisória horizontal completa abaixo das tabs: `1px solid --color-border`
+- **Hover (inativo):** underline `border-bottom: 2px solid #1DA1F2`, texto `--color-text-primary`
+
+### 4.3 Card de Criação de Post
+
+- **Border-radius:** 12px
+- **Border:** 1px solid
+- **Padding:** 16px
+- **Textarea**
+  - Placeholder: "O que está acontecendo?"
+  - Mínimo 3 linhas de altura; expansível com o conteúdo
+- **Rodapé do card (abaixo da linha divisória)**
+  - Linha divisória: `1px solid #2A3A50`, `margin: 8px 0`
+  - **Ícone de imagem** (canto esquerdo):
+    - Ícone outline `Image`, tamanho 32px, cor `#1D9BF0`
+    - Ao clicar: abre um a opção de carregar a imagem
+- **Botão "Postar"** (canto direito):
+  - mesma configurações do botão primario
+  - **Hover:** `background: #0B7DD1`
+  - **Desabilitado** (textarea vazio): `opacity: 0.5; cursor: not-allowed`
+
+### 4.4 Cards de Post
+
+- **Border-radius:** 12px;
+- **Border:** 1px solid
+- **Padding:** 16px;
+- **Cabeçalho do card**
+  - **Nome:** (#FFFFFF) + **handle** (#6E767D) + **data** (#6E767D), na mesma linha;
+- **Conteúdo do card**
+  - **Título:** Bold, #FFFFFF, 18px;
+  - **Corpo:** Regular, #CBD5E1, ^16px;
+  - **Imagem** (quando presente):
+    - `width: 100%; max-height: 300px; object-fit: cover; border-radius: 8px; margin-top: 12px`
+    - Em caso de erro no carregamento: exibir placeholder cinza com ícone de imagem quebrada
+    - **Rodapé do card**
+      - Ícone de curtida:
+        - Coração — estado ativo (preenchido vermelho #EB5757) e inativo (outline vermelho #EB5757). - Tamanho 24px, posicionado abaixo do conteúdo.
+        - **Clique:** animação de escala `scale(1.2) → scale(1)` em 200ms (feedback visual da atualização otimista)
+
+### 4.5 Inputs (Formulários de Login / Cadastro)
+
+- **Estrutura:** Label acima + input com ícone à direita;
+- **Label:** 14px, Regular, `--color-text-primary`, `margin-bottom: 6px`
+- **Altura:** 57px estimada;
+- **Border-radius:** 8px;
+- **Border:** 1px solid
+- **Padding:** 16px
+- **Cor do texto digitado:** `--color-text-primary`
+- **Placeholder:** 14px, Regular, `--color-text-secondary`
+- **Ícones:** tamanho 24px, cor #62748E;
+  - Campo senha: ícone de olho (`Eye` / `EyeOff`) para mostrar/ocultar
+- **Erro:** `border-color: #EB5757`; mensagem de erro abaixo do input, 12px, Regular, `#EB5757`
+
+### 4.6 Botão CTA "Continuar"
+
+- **Largura:** 100% do container;
+- **Altura:** 56px;
+- **Border-radius**: full;
+- Configurações de cor e texto de botão primario.
+
+### 4.7 TOS Footer (Termos de Serviço)
+
+- **Texto:** "Ao continuar, você concorda com os"
+- **Links inline:** "Termos de Serviço" e "Política de Privacidade"
+- Centralizados, quebra de linha entre a frase e os links
+- **Estilo dos links:** `text-decoration: underline`, cor `#0D93F2`
+- **Tamanho:** 12px, Regular, `--color-text-secondary`
+
+### 4.8 Footer
+
+- **Altura:** 56px;
+- Apenas o texto "Mini Twitter" alinhado à esquerda.
+
+## 5. ESPAÇAMENTO E DIMENSÕES
+
+### Página Home
+
+- **Largura máxima do feed:** 640px, centralizado com margin: 0 auto
+- **Gap entre cards:** 24px
+- **Padding interno dos cards:** 16px
+- **Padding top do feed (abaixo da navbar):** 24px
+- **Padding bottom (antes da paginação):** 24px
+- **Espaçamento entre nome/handle/data:** 6px horizontal
+- **Espaçamento entre título e corpo:** 8px
+- **Espaçamento entre corpo e ícone de curtida:** 8px
+
+### Página Login / Cadastro
+
+- **Container central:** 480px
+- **Gap entre título e tabs:** 56px
+- **Gap entre tabs, heading e form:** 24px
+- **Gap entre inputs do form:** 20px
+- **Gap entre último input, botão CTA e TOS footer:** 24px
+
+## 6. ESTADOS E EFEITOS VISUAIS
+
+### Hover States (obrigatórios)
+
+| Elemento                 | Efeito                               |
+| ------------------------ | ------------------------------------ |
+| Botão primário           | `background: #0B7DD1`                |
+| Botão secundário / ghost | `background: rgba(255,255,255,0.05)` |
+| Card de post             | `border-color: #0D93F2`              |
+| Ícone de curtida         | `transform: scale(1.1)`              |
+| Ícone editar             | `color: #0D93F2`                     |
+| Ícone deletar            | `color: #EB5757`                     |
+| Links TOS                | `color: #0B7DD1`                     |
+| Input busca              | `border-color: #0D93F2`              |
+
+### Focus States (obrigatórios)
+
+| Elemento      | Efeito                                                   |
+| ------------- | -------------------------------------------------------- |
+| Input (todos) | `border-color: #0D93F2; box-shadow: 0 0 0 2px #0D93F233` |
+| Botões        | `outline: 2px solid #0D93F2; outline-offset: 2px`        |
+
+### Transições
+
+- **Padrão global:** `transition: all 150ms ease`
+- **Ícone de curtida (clique):** `transform: scale(1.2)` → `scale(1)` em 200ms
+- **Troca de tema:** sem transição brusca — aplicar `transition: background-color 200ms ease, color 200ms ease` no `body`
+- **Sem glassmorphism ou blur.**
+
+### Animações de Loading
+
+- **Skeleton loader** nos cards de post durante o carregamento inicial: retângulos com `background: --color-border`, animação `pulse` do Tailwind.
+- **Spinner** no botão CTA durante submit do formulário.
+
+## 7. RESPONSIVIDADE
+
+O layout é **desktop-first**. Breakpoints usando Tailwind:
+
+## Mobile (`< 640px`)
+
+- Feed ocupa 100% da largura com `padding: 0 16px`
+- Navbar: logo some, busca vira ícone de lupa clicável, botões de ação viram menu hambúrguer ou ícones
+- Cards de post: `border-radius: 0` (full bleed) ou mantém `12px` com padding lateral
+- Container de login: `width: 100%; padding: 24px`
+
+### Tablet (`640px – 1024px`)
+
+- Feed mantém `max-width: 640px` centralizado
+- Navbar exibe logo + busca comprimida + botões de ação
+
+### Desktop (`> 1024px`)
+
+- Layout completo conforme especificado nas seções anteriores
+- Navbar exibe todos os elementos em plena largura
+
+## 8. ACESSIBILIDADE
+
+- Todos os botões devem ter `aria-label` descritivo quando não possuem texto visível (ex: botão de logout, ícones de editar/deletar).
+- Inputs devem ter `id` e `htmlFor` associando label ao campo.
+- Ícone de curtida: `aria-label="Curtir post"` / `aria-label="Descurtir post"` conforme estado.
+- Contraste mínimo de texto: 4.5:1 (WCAG AA).
+- Navegação por teclado: todos os elementos interativos devem ser focáveis com `Tab` e ativáveis com `Enter`/`Space`.

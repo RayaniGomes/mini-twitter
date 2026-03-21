@@ -1,5 +1,5 @@
 // src/components/PostCard.tsx
-import { HeartIcon } from './Icons';
+import { Heart } from 'iconsax-react';
 
 interface PostCardProps {
   name: string;
@@ -40,8 +40,15 @@ export function PostCard({ name, handle, date, title, content, image, liked }: P
       )}
       
       <div className="mt-2 flex items-center gap-2">
-        <button className="hover:bg-heart/10 p-2 rounded-full transition-colors -ml-2 flex items-center justify-center group cursor-pointer">
-          <HeartIcon filled={liked} />
+        <button
+          aria-label={liked ? 'Descurtir post' : 'Curtir post'}
+          className="hover:bg-heart/10 p-2 rounded-full transition-all duration-200 hover:scale-110 -ml-2 flex items-center justify-center cursor-pointer"
+        >
+          <Heart
+            size={24}
+            variant={liked ? 'Bold' : 'Linear'}
+            color="#EB5757"
+          />
         </button>
       </div>
     </article>
