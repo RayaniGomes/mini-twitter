@@ -4,10 +4,9 @@ import { useState, useEffect } from 'react';
 import { useAuthStore } from '../stores/authStore';
 import { usePostStore } from '../stores/postStore';
 import { api } from '../services/api';
-
-interface NavbarProps {
-  onNavigateToAuth: () => void;
-}
+import type { NavbarProps } from '../interfaces/global.interface';
+import { formatName } from '../utils/formatHandle';
+import { Button } from './ui/Button';
 
 export function Navbar({ onNavigateToAuth }: NavbarProps) {
   const { user, clearAuth } = useAuthStore();
@@ -22,12 +21,9 @@ export function Navbar({ onNavigateToAuth }: NavbarProps) {
   }, [localSearch, setSearchQuery]);
 
   const handleLogout = async () => {
-    // 1. Limpa o token e o user localmente para resposta imediata ao clique
     clearAuth();
-    // 2. Redireciona para a tela de Auth imediatamente
     onNavigateToAuth(); 
 
-    // 3. Informa o backend no background (sem travar a interface)
     try {
       await api.post('/auth/logout');
     } catch (e) {
@@ -55,28 +51,31 @@ export function Navbar({ onNavigateToAuth }: NavbarProps) {
 
         <div className="flex items-center gap-2 sm:gap-4 shrink-0">
           {user ? (
+            <>
+              <span className="text-[14px] sm:text-[16px] font-regular text-heading dark:text-white">{formatName(user.name)}</span>
               <button
                 onClick={handleLogout}
                 aria-label="Logout"
                 className=" flex items-center gap-2 hover:opacity-80 p-2 rounded-full transition-all duration-300 cursor-pointer disabled:opacity-50 bg-brand dark:bg-transparent"
               >
-                {user.name}
                 <LogoutCurve size={20} color="white" />
               </button>
+            </>
           ) : (
             <>
-              <button
+              <Button
+                variant="outline"
                 onClick={onNavigateToAuth}
-                className="text-[14px] sm:text-[16px] font-bold text-heading dark:text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-edge hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-300 cursor-pointer"
+                className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[14px] sm:text-[16px]"
               >
                 Registrar-se
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={onNavigateToAuth}
-                className="text-[14px] sm:text-[16px] font-bold text-white bg-brand px-4 sm:px-6 py-1.5 sm:py-2 rounded-full shadow-[0px_4px_6px_-4px_rgba(13,147,242,0.2),0px_10px_15px_-3px_rgba(13,147,242,0.2)] hover:bg-[#0B7DD1] transition-colors duration-300 cursor-pointer"
+                className="px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-[14px] sm:text-[16px]"
               >
                 Login
-              </button>
+              </Button>
             </>
           )}
         </div>

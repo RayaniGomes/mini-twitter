@@ -1,13 +1,9 @@
 import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { api } from '../services/api';
-import type { Post } from '../stores/postStore';
+import { fetchPosts, createPost, likePost, updatePost, deletePost } from '../services/postsApi';
+import type { Post } from '../interfaces/post.interface';
+import type { PostsPage } from '../interfaces/post.interface';
 
 export const PAGE_SIZE = 3;
-
-export interface PostsPage {
-  posts: Post[];
-  nextPage: number | undefined;
-}
 
 export const postQueryKeys = {
   all: ['posts'] as const,
@@ -18,12 +14,10 @@ export const postQueryKeys = {
 export async function fetchPostsPage({ pageParam = 1, queryKey }: any): Promise<PostsPage> {
   const search = queryKey ? queryKey[2]?.search : undefined;
 
-  const response = await api.get('/posts', {
-    params: {
-      page: pageParam,
-      limit: PAGE_SIZE,
-      ...(search ? { search } : {}),
-    },
+  const response = await fetchPosts({
+    page: pageParam,
+    limit: PAGE_SIZE,
+    ...(search ? { search } : {}),
   });
 
   const posts: Post[] = Array.isArray(response.data)
@@ -51,7 +45,7 @@ export function useCreatePost() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (postData: Partial<Post>) => {
-      const response = await api.post('/posts', postData);
+      const response = await createPost(postData);
       return response.data;
     },
     onSuccess: () => {
@@ -64,7 +58,7 @@ export function useDeletePost() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: string) => {
-      await api.delete(`/posts/${id}`);
+      await deletePost(id);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: postQueryKeys.all });
@@ -76,7 +70,7 @@ export function useUpdatePost() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ id, post }: { id: string; post: Partial<Post> }) => {
-      const response = await api.put(`/posts/${id}`, post);
+      const response = await updatePost(id, post);
       return response.data;
     },
     onSuccess: () => {
@@ -89,17 +83,17 @@ export function useLikePost() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: string) => {
-      const response = await api.post(`/posts/${id}/like`);
+      const response = await likePost(id);
       return response.data;
     },
     onMutate: async (id: string) => {
       await queryClient.cancelQueries({ queryKey: postQueryKeys.all });
-      
+
       const previousQueries = queryClient.getQueriesData({ queryKey: postQueryKeys.all });
 
       queryClient.setQueriesData({ queryKey: postQueryKeys.all }, (old: any) => {
         if (!old) return old;
-        
+
         // Paginated infinite queries
         if (old.pages) {
           return {
@@ -115,7 +109,7 @@ export function useLikePost() {
             })),
           };
         }
-        
+
         // Single post array
         if (Array.isArray(old)) {
           return old.map((post: Post) => {
@@ -125,12 +119,12 @@ export function useLikePost() {
             return post;
           });
         }
-        
+
         // Single post object
         if (old.id === id) {
           return { ...old, likesCount: old.likesCount > 0 ? 0 : old.likesCount + 1 };
         }
-        
+
         return old;
       });
 

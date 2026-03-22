@@ -1,24 +1,13 @@
 // src/components/PostCard.tsx
 import { Heart, MoreCircle } from 'iconsax-react';
 import { useState } from 'react';
-import type { Post } from '../stores/postStore';
+import type { Post } from '../interfaces/post.interface';
+import { formatDate } from '../utils/formatDate';
+import { formatHandle as handle } from '../utils/formatHandle';
 import { useLikePost, useDeletePost } from '../hooks/usePosts';
 import { useAuthStore } from '../stores/authStore';
 import { toast } from 'react-toastify';
 import { EditPostModal } from './EditPostModal';
-
-function handle(authorName: string){
-  const handle = "@" + authorName.toLowerCase().replace(" ", "");
-  return handle;
-}
-
-function formatDate(createdAt: string){
-  const dateObj = new Date(createdAt);
-  const day = dateObj.getDate() < 10 ? '0' + dateObj.getDate() : dateObj.getDate();
-  const month = dateObj.getMonth() + 1 < 10 ? '0' + (dateObj.getMonth() + 1) : dateObj.getMonth() + 1;
-  const year = dateObj.getFullYear();
-  return `${day}/${month}/${year}`;
-}
 
 export function PostCard(post: Post) {
   const { authorName, authorId, createdAt, title, content, image, likesCount, id } = post;
@@ -29,7 +18,7 @@ export function PostCard(post: Post) {
   const { mutate: likePost } = useLikePost();
   const { mutateAsync: deletePost } = useDeletePost();
   const { user, isAuthenticated } = useAuthStore();
-  
+
   const isOwner = isAuthenticated() && user?.id === authorId;
 
   const handleLike = () => {
@@ -60,25 +49,25 @@ export function PostCard(post: Post) {
           <span className="font-regular text-[14px] text-muted">{handle(authorName)}</span>
           <span className="font-regular text-[14px] text-muted">{createdAt ? formatDate(createdAt.toString()) : ''}</span>
         </div>
-        
-        {isOwner ?  (
+
+        {isOwner ? (
           <div className="relative">
-            <button 
+            <button
               onClick={() => setShowDropdown(!showDropdown)}
               className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-200 cursor-pointer text-muted"
             >
               <MoreCircle size={24} color='white' className="rotate-90" />
             </button>
-            
+
             {showDropdown && (
               <div className="absolute right-0 top-full mt-1 w-32 bg-card border border-edge rounded-[8px] shadow-lg overflow-hidden z-20 animate-in fade-in slide-in-from-top-2 duration-200">
-                <button 
+                <button
                   onClick={() => { setShowDropdown(false); setIsEditing(true); }}
                   className="w-full text-left px-4 py-2 text-[14px] text-heading hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer"
                 >
                   Editar
                 </button>
-                <button 
+                <button
                   onClick={handleDelete}
                   className="w-full text-left px-4 py-2 text-[14px] text-heart hover:bg-heart/10 transition-colors cursor-pointer"
                 >
@@ -87,28 +76,28 @@ export function PostCard(post: Post) {
               </div>
             )}
           </div>
-        ):
-        (
-          <div className="relative">
-            <button 
-              onClick={() => toast.warn("Você não tem permissão para editar ou deletar este post.")}
-              className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-200 cursor-pointer text-muted opacity-50"
-            >
-              <MoreCircle size={24} color='white' className="rotate-90" />
-            </button>
-          </div>
-        )}
+        ) :
+          (
+            <div className="relative">
+              <button
+                onClick={() => toast.warn("Você não tem permissão para editar ou deletar este post.")}
+                className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-200 cursor-pointer text-muted opacity-50"
+              >
+                <MoreCircle size={24} color='white' className="rotate-90" />
+              </button>
+            </div>
+          )}
       </div>
       <h2 className="font-bold text-[18px] text-heading">{title}</h2>
-      
+
       <p className="font-regular text-[16px] text-body leading-relaxed">
         {content}
       </p>
-      
+
       {image && !imgError && (
-        <img 
-          src={image} 
-          alt="Imagem do post" 
+        <img
+          src={image}
+          alt="Imagem do post"
           className="w-full max-h-[300px] object-cover rounded-[8px] mt-[12px]"
           onError={() => setImgError(true)}
         />
@@ -124,7 +113,7 @@ export function PostCard(post: Post) {
           <span className="text-sm">Erro ao carregar imagem</span>
         </div>
       )}
-      
+
       <div className="mt-2 flex items-center gap-2">
         <button
           onClick={handleLike}
@@ -141,11 +130,11 @@ export function PostCard(post: Post) {
           )}
         </button>
       </div>
-      
-      <EditPostModal 
-        post={post} 
-        isOpen={isEditing} 
-        onClose={() => setIsEditing(false)} 
+
+      <EditPostModal
+        post={post}
+        isOpen={isEditing}
+        onClose={() => setIsEditing(false)}
       />
     </article>
   );

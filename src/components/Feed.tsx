@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { PostCard } from "../components/PostCard";
 import { usePostStore } from "../stores/postStore";
 import { usePostsFeed } from "../hooks/usePosts";
-import { PostSkeleton } from "./postSkeleton";
+import { PostSkeleton } from "./PostSkeleton";
 
 export function Feed() {
   const sentinelRef = useRef<HTMLDivElement>(null);

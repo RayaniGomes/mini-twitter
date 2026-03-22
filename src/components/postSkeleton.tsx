@@ -1,4 +1,3 @@
-/* ─── Skeleton loader ─────────────────────────────────── */
 export function PostSkeleton() {
   return (
     <div className="w-full bg-card-post rounded-[12px] border border-edge p-4 flex flex-col gap-3 animate-pulse">

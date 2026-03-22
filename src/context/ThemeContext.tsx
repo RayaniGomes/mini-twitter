@@ -1,10 +1,6 @@
-// src/context/ThemeContext.tsx
 import { createContext, useContext, useEffect, useState } from 'react';
+import type { ThemeContextType } from '../interfaces/global.interface';
 
-interface ThemeContextType {
-  isDark: boolean;
-  toggleTheme: () => void;
-}
 
 const ThemeContext = createContext<ThemeContextType>({
   isDark: true,
