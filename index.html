@@ -1,14 +1,60 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mini Twitter</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- ═══════════════════════════════════════════
+         SEO Básico
+    ═══════════════════════════════════════════ -->
+    <title>Mini Twitter — Compartilhe o que está acontecendo</title>
+    <meta name="description" content="Mini Twitter é uma rede social minimalista onde você pode compartilhar posts, curtir ideias e se conectar com outros usuários em tempo real." />
+    <meta name="keywords" content="mini twitter, rede social, posts, timeline, feed, compartilhar, curtir" />
+    <meta name="author" content="Mini Twitter" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mini-twitter.vercel.app/" />
+
+    <!-- ═══════════════════════════════════════════
+         Open Graph (Facebook, LinkedIn, WhatsApp)
+    ═══════════════════════════════════════════ -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mini Twitter" />
+    <meta property="og:title" content="Mini Twitter — Compartilhe o que está acontecendo" />
+    <meta property="og:description" content="Mini Twitter é uma rede social minimalista onde você pode compartilhar posts, curtir ideias e se conectar com outros usuários em tempo real." />
+    <meta property="og:url" content="https://mini-twitter.vercel.app/" />
+    <meta property="og:image" content="https://mini-twitter.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Mini Twitter — Feed de posts" />
+    <meta property="og:locale" content="pt_BR" />
+
+    <!-- ═══════════════════════════════════════════
+         Twitter Cards
+    ═══════════════════════════════════════════ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mini Twitter — Compartilhe o que está acontecendo" />
+    <meta name="twitter:description" content="Mini Twitter é uma rede social minimalista onde você pode compartilhar posts, curtir ideias e se conectar com outros usuários em tempo real." />
+    <meta name="twitter:image" content="https://mini-twitter.vercel.app/og-image.png" />
+    <meta name="twitter:image:alt" content="Mini Twitter — Feed de posts" />
+
+    <!-- ═══════════════════════════════════════════
+         PWA / Aparência
+    ═══════════════════════════════════════════ -->
+    <meta name="theme-color" content="#0D93F2" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <!-- ═══════════════════════════════════════════
+         Fonts (Manrope)
+    ═══════════════════════════════════════════ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    
   </head>
+
   <body class="bg-[#0F172B] antialiased">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
