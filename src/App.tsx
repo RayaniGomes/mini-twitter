@@ -6,12 +6,14 @@ import { HomePage } from './pages/HomePage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThemeToggle } from './components/ThemeToggle';
+import { useAuthStore } from './stores/authStore';
 
 
 type Page = 'home' | 'auth';
 
 function AppContent() {
-  const [currentPage, setCurrentPage] = useState<Page>('home');
+  const { isAuthenticated } = useAuthStore();
+  const [currentPage, setCurrentPage] = useState<Page>(isAuthenticated() ? 'home' : 'auth');
 
   if (currentPage === 'auth') {
     return (
