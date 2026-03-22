@@ -51,6 +51,7 @@ export function LoginForm({ onNavigateHome }: { onNavigateHome: () => void }) {
           placeholder="Insira o seu e-mail"
           icon={<Sms size={24} color="#62748E" />}
           error={errors.email?.message}
+          data-testid="input-email"
         />
         <InputField
           {...register('password')}
@@ -60,11 +61,12 @@ export function LoginForm({ onNavigateHome }: { onNavigateHome: () => void }) {
           placeholder="Insira a sua senha"
           icon={<Eye size={24} color="#62748E" />}
           error={errors.password?.message}
+          data-testid="input-password"
         />
       </div>
 
       <div className="mt-6">
-        <Button type="submit" disabled={isSubmitting} size="full">
+        <Button type="submit" disabled={isSubmitting} size="full" data-testid="btn-login">
           {isSubmitting ? 'Carregando...' : 'Continuar'}
         </Button>
       </div>

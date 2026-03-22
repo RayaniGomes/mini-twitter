@@ -26,13 +26,13 @@ export function PostCard(post: Post) {
       toast.warn("Você precisa estar autenticado para curtir um post.");
       return;
     }
-    likePost(id);
+    likePost(id.toString());
   };
 
   const handleDelete = async () => {
     if (window.confirm("Certeza que deseja deletar este post?")) {
       try {
-        await deletePost(id);
+        await deletePost(id.toString());
         toast.success("Post deletado!");
       } catch (err) {
         toast.error("Erro ao deletar post.");
@@ -42,7 +42,10 @@ export function PostCard(post: Post) {
   };
 
   return (
-    <article className="w-full max-w-[640px] bg-card-post rounded-[12px] border border-edge p-4 flex flex-col gap-[8px] transition-colors duration-300">
+    <article 
+      className="w-full max-w-[640px] bg-card-post rounded-[12px] border border-edge p-4 flex flex-col gap-[8px] transition-colors duration-300"
+      data-testid={`post-card-${post.id}`}
+    >
       <div className='flex justify-between items-start'>
         <div className="flex items-center gap-[6px] flex-wrap">
           <span className="font-bold text-[16px] text-heading">{authorName}</span>
@@ -55,6 +58,7 @@ export function PostCard(post: Post) {
             <button
               onClick={() => setShowDropdown(!showDropdown)}
               className="p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-200 cursor-pointer text-muted"
+              data-testid="btn-post-actions"
             >
               <MoreCircle size={24} color='white' className="rotate-90" />
             </button>
@@ -64,12 +68,14 @@ export function PostCard(post: Post) {
                 <button
                   onClick={() => { setShowDropdown(false); setIsEditing(true); }}
                   className="w-full text-left px-4 py-2 text-[14px] text-heading hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer"
+                  data-testid="btn-edit-post"
                 >
                   Editar
                 </button>
                 <button
                   onClick={handleDelete}
                   className="w-full text-left px-4 py-2 text-[14px] text-heart hover:bg-heart/10 transition-colors cursor-pointer"
+                  data-testid="btn-delete-post"
                 >
                   Deletar
                 </button>
@@ -119,6 +125,8 @@ export function PostCard(post: Post) {
           onClick={handleLike}
           aria-label={likesCount ? 'Descurtir post' : 'Curtir post'}
           className="hover:bg-heart/10 p-2 rounded-full transition-all duration-200 hover:scale-110 -ml-2 flex items-center gap-1.5 justify-center cursor-pointer text-heart"
+          data-testid="btn-like"
+          disabled={!isAuthenticated()}
         >
           <Heart
             size={24}

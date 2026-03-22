@@ -46,6 +46,7 @@ export function Navbar({ onNavigateToAuth }: NavbarProps) {
             onChange={(e) => setLocalSearch(e.target.value)}
             placeholder="Buscar por post..." 
             className="w-full bg-input border border-edge rounded-[8px] py-2 pl-10 pr-4 text-[14px] font-medium text-body placeholder:text-placeholder focus:outline-none focus:border-brand transition-colors duration-300"
+            data-testid="input-search"
           />
         </div>
 
@@ -57,6 +58,7 @@ export function Navbar({ onNavigateToAuth }: NavbarProps) {
                 onClick={handleLogout}
                 aria-label="Logout"
                 className=" flex items-center gap-2 hover:opacity-80 p-2 rounded-full transition-all duration-300 cursor-pointer disabled:opacity-50 bg-brand dark:bg-transparent"
+                data-testid="btn-logout"
               >
                 <LogoutCurve size={20} color="white" />
               </button>
@@ -67,12 +69,14 @@ export function Navbar({ onNavigateToAuth }: NavbarProps) {
                 variant="outline"
                 onClick={onNavigateToAuth}
                 className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[14px] sm:text-[16px]"
+                data-testid="btn-register-nav"
               >
                 Registrar-se
               </Button>
               <Button
                 onClick={onNavigateToAuth}
                 className="px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-[14px] sm:text-[16px]"
+                data-testid="btn-login-nav"
               >
                 Login
               </Button>

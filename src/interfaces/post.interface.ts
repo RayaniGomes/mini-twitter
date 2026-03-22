@@ -1,10 +1,10 @@
 export interface Post {
-  id: string;
+  id: number;
   title: string;
   content: string;
   image?: string | null;
   authorName: string;
-  authorId: string;
+  authorId: number;
   createdAt?: Date;
   likesCount: number;
 }

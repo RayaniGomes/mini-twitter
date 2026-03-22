@@ -62,6 +62,7 @@ export function RegisterForm({
           placeholder="Insira o seu nome"
           icon={<Profile size={24} color="#62748E" />}
           error={errors.name?.message}
+          data-testid="input-name"
         />
         <InputField
           {...register('email')}
@@ -71,6 +72,7 @@ export function RegisterForm({
           placeholder="Insira o seu e-mail"
           icon={<Sms size={24} color="#62748E" />}
           error={errors.email?.message}
+          data-testid="input-email"
         />
         <InputField
           {...register('password')}
@@ -80,11 +82,12 @@ export function RegisterForm({
           placeholder="Insira a sua senha"
           icon={<Eye size={24} color="#62748E" />}
           error={errors.password?.message}
+          data-testid="input-password"
         />
       </div>
 
       <div className="mt-6">
-        <Button type="submit" disabled={isSubmitting} size="full">
+        <Button type="submit" disabled={isSubmitting} size="full" data-testid="btn-register">
           {isSubmitting ? 'Carregando...' : 'Continuar'}
         </Button>
       </div>

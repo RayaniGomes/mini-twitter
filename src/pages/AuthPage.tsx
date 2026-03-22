@@ -31,6 +31,7 @@ export function AuthPage({ onNavigateHome }: AuthPageProps) {
                     ? 'border-[#1DA1F2] text-heading'
                     : 'border-transparent text-muted hover:text-heading hover:border-[#1DA1F2]'
                 }`}
+                data-testid={`tab-${tab}`}
               >
                 {tab === 'login' ? 'Login' : 'Cadastrar'}
               </button>

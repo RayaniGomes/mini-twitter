@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import type { InputFieldProps } from "../../interfaces/global.interface";
+import type { InputFieldProps as OriginalInputFieldProps } from "../../interfaces/global.interface";
 import { Eye, EyeSlash } from "iconsax-react";
 
+interface InputFieldProps extends OriginalInputFieldProps {
+  'data-testid'?: string;
+}
+
 export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
-  ({ id, label, type, placeholder, icon, error, borderless = false, ...props }, ref) => {
+  ({ id, label, type, placeholder, icon, error, borderless = false, 'data-testid': dataTestId, ...props }, ref) => {
     const [showPassword, setShowPassword] = useState(false);
     const isPassword = type === 'password';
     const inputType = isPassword ? (showPassword ? 'text' : 'password') : type;
@@ -27,6 +31,7 @@ export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
             type={inputType}
             placeholder={placeholder}
             className={`${baseInput} ${borderless ? borderlessInput : standardInput}`}
+            data-testid={dataTestId}
           />
           {(icon || isPassword) && (
             <div className="absolute right-4 top-1/2 -translate-y-1/2 text-muted">
@@ -36,6 +41,7 @@ export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
                   onClick={() => setShowPassword((p) => !p)}
                   aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
                   className="flex items-center justify-center text-muted hover:text-heading transition-colors cursor-pointer"
+                  data-testid={dataTestId ? `${dataTestId}-toggle` : undefined}
                 >
                   {showPassword ? <EyeSlash size={24} color="#62748E" /> : <Eye size={24} color="#62748E" />}
                 </button>

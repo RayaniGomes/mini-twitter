@@ -6,11 +6,12 @@ type ButtonSize = 'sm' | 'md' | 'lg' | 'full';
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
-  children: React.ReactNode;
+  className?: string;
+  'data-testid'?: string;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary', size = 'md', className = '', children, ...props }, ref) => {
+  ({ variant = 'primary', size = 'md', className = '', children, 'data-testid': dataTestId, ...props }, ref) => {
     
     const baseStyles = "inline-flex items-center justify-center font-bold transition-colors duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none";
     
@@ -31,6 +32,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+        data-testid={dataTestId}
         {...props}
       >
         {children}

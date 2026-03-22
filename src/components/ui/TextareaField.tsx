@@ -1,8 +1,12 @@
 import React from "react";
-import type { TextareaFieldProps } from "../../interfaces/global.interface";
+import type { TextareaFieldProps as OriginalTextareaFieldProps } from "../../interfaces/global.interface";
+
+interface TextareaFieldProps extends OriginalTextareaFieldProps {
+  'data-testid'?: string;
+}
 
 export const TextareaField = React.forwardRef<HTMLTextAreaElement, TextareaFieldProps>(
-  ({ id, label, error, className = "", borderless = false, ...props }, ref) => {
+  ({ id, label, error, className = "", borderless = false, 'data-testid': dataTestId, ...props }, ref) => {
     const baseTextarea = "w-full rounded-[8px] text-heading placeholder:text-placeholder focus:outline-none transition-all duration-150 resize-none";
     const standardTextarea = `bg-input border ${error ? 'border-heart' : 'border-edge'} p-4 text-[14px] font-normal focus:border-brand focus:shadow-[0_0_0_2px_rgba(13,147,242,0.2)]`;
     const borderlessTextarea = `bg-transparent border-none p-0 text-[18px] font-medium`;
@@ -19,6 +23,7 @@ export const TextareaField = React.forwardRef<HTMLTextAreaElement, TextareaField
           ref={ref}
           id={id}
           className={`${baseTextarea} ${borderless ? borderlessTextarea : standardTextarea} ${className}`}
+          data-testid={dataTestId}
         />
         {error && <p className="text-[12px] font-normal text-heart">{error}</p>}
       </div>

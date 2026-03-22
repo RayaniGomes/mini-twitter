@@ -53,6 +53,7 @@ export function CreatePost() {
           placeholder="Título do post"
           error={errors.title?.message}
           borderless
+          data-testid="input-post-title"
         />
 
         <TextareaField 
@@ -62,6 +63,7 @@ export function CreatePost() {
           className="min-h-[80px]"
           error={errors.content?.message}
           borderless
+          data-testid="input-post-content"
         />
 
         {showImageInput && (
@@ -70,6 +72,7 @@ export function CreatePost() {
             id="post-image-url"
             placeholder="URL da imagem (opcional)"
             error={errors.imageUrl?.message}
+            data-testid="input-post-image"
           />
         )}
 
@@ -81,6 +84,7 @@ export function CreatePost() {
             variant="ghost"
             onClick={() => setShowImageInput(!showImageInput)}
             className="p-2 flex items-center justify-center rounded-full"
+            data-testid="btn-toggle-image"
           >
             <Gallery size={32} color="#1D9BF0" />
           </Button>
@@ -89,6 +93,7 @@ export function CreatePost() {
             type="submit" 
             disabled={createPostMutation.isPending}
             className="px-6 rounded-[8px]"
+            data-testid="btn-post"
           >
             {createPostMutation.isPending ? 'Postando...' : 'Postar'}
           </Button>
