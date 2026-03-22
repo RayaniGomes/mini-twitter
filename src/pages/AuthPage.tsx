@@ -42,7 +42,7 @@ export function AuthPage({ onNavigateHome }: AuthPageProps) {
           {activeTab === 'login' ? (
             <LoginForm onNavigateHome={onNavigateHome} />
           ) : (
-            <RegisterForm onNavigateToLogin={() => setActiveTab('login')} />
+            <RegisterForm onNavigateHome={onNavigateHome} />
           )}
         </div>
 

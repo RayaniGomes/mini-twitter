@@ -2,12 +2,19 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { registerSchema, type RegisterFormInputs } from "../schemas/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerUser } from "../services/authApi";
+import { loginUser, registerUser } from "../services/authApi";
 import { InputField } from "./ui/InputField";
 import { Button } from "./ui/Button";
 import { Eye, Profile, Sms } from "iconsax-react";
 
-export function RegisterForm({ onNavigateToLogin }: { onNavigateToLogin: () => void }) {
+import { useAuthStore } from "../stores/authStore";
+
+export function RegisterForm({
+  onNavigateHome
+}: {
+  onNavigateHome: () => void;
+}) {
+  const { setAuth } = useAuthStore();
   const [globalError, setGlobalError] = useState('');
 
   const {
@@ -22,7 +29,11 @@ export function RegisterForm({ onNavigateToLogin }: { onNavigateToLogin: () => v
     setGlobalError('');
     try {
       await registerUser(data);
-      onNavigateToLogin();
+      const loginResponse = await loginUser({ email: data.email, password: data.password });
+      if (loginResponse.data?.token && loginResponse.data?.user) {
+        setAuth(loginResponse.data.token, loginResponse.data.user);
+        onNavigateHome();
+      }
     } catch (error: any) {
       if (error.response?.status === 400) {
         setGlobalError('E-mail já está em uso ou dados inválidos.');
