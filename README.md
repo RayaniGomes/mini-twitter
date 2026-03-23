@@ -1,73 +1,55 @@
-# React + TypeScript + Vite
+# 🐦 Mini Twitter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Sobre o Projeto
 
-Currently, two official plugins are available:
+> Plataforma de microblog onde usuários podem criar posts, curtir e interagir em tempo real.
+>
+> Desenvolvido como projeto de desafio do processo seletivo da B2BIT, para demonstrar conhecimento em React, consumo de APIs e boas práticas de arquitetura frontend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![Home Page](image.png)
 
-## React Compiler
+## 🚀 Tecnologias Utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [Axios](https://axios-http.com)
+- [Iconsax React](https://iconsax-react.pages.dev)
+- [React](https://react.dev)
+- [React Hook Form](https://react-hook-form.com)
+- [React Query (TanStack)](https://tanstack.com/query)
+- [React Toastify](https://fkhadra.github.io/react-toastify)
+- [Tailwind CSS](https://tailwindcss.com)
+- [TypeScript](https://www.typescriptlang.org)
+- [Vite](https://vitejs.dev)
+- [Zod](https://zod.dev)
+- [Zustand](https://zustand-demo.pmnd.rs)
 
-## Expanding the ESLint configuration
+## 📦 Instalação e Configuração
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clone o projeto:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+   ```sh
+   git clone https://github.com/RayaniGomes/mini-twitter.git
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+2. Instale as dependências:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+   ```sh
+   npm install
+   ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+3. Configure as variáveis de ambiente `.env`:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+   ```env
+   VITE_API_BASE_URL=http://localhost:3000
+   ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+4. Inicie o servidor de desenvolvimento:
+
+   ```sh
+   npm run dev
+   ```
+
+5. Acesse em: `http://localhost:5173`
+
+## 📝 Licença
+
+[MIT License](https://github.com/RayaniGomes/mini-twitter/blob/main/LICENSE) © [Rayani Gomes](https://github.com/RayaniGomes)

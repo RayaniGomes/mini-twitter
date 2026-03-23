@@ -15,16 +15,16 @@ function AppContent() {
   const { isAuthenticated } = useAuthStore();
   const [currentPage, setCurrentPage] = useState<Page>(isAuthenticated() ? 'home' : 'auth');
 
-  if (currentPage === 'auth') {
+  if (currentPage === 'home') {
     return (
       <>
-        <AuthPage onNavigateHome={() => setCurrentPage('home')} />
+        <AuthPage onNavigateHome={() => setCurrentPage('auth')} />
         <ThemeToggle />
       </>
     );
   }
 
-  return <HomePage onNavigateToAuth={() => setCurrentPage('auth')} />;
+  return <HomePage onNavigateToAuth={() => setCurrentPage('home')} />;
 }
 
 export default function App() {
