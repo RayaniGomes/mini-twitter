@@ -1,4 +1,4 @@
-# 🐦 Mini Twitter
+# 🦉 Mini Twitter
 
 ## 📌 Sobre o Projeto
 
